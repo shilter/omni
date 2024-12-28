@@ -1,0 +1,41 @@
+{% extends "layouts.html" %}
+    {% block content %}
+    <a href="{% url 'movies:Search' %}" class="btn btn-primary">Search</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Image</th>
+                <th>Language</th>
+                <th>Duration</th>
+                <th>Desc Movie</th>
+                <th>User Rating</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if movies %}
+                {% for movie in movies %}
+                <tr>
+                    <td>
+                        <p> Movie Name {{ movie.moviesName  }}</p>
+                        <p> Mpa Rating {{ movie.moviesMpaaRating.MpaaLabel }}</p>
+                        <p> Genres {{ movie.moviesGenres.GenresName }}</p>
+                    </td>
+                    <td><img src="media/{{ movie.moviesFiles  }}" width="150px" height="150px" /></td>
+                    <td>{{ movie.moviesLanguage  }}</td>
+                    <td>{{ movie.moviesDuration  }}</td>
+                    <td>{{ movie.moviesDescription  }}</td>
+                    <td>{{ movie.moviesUserRatings  }}</td>
+                    <td>
+                        <a href="{% url 'movies:Details' movie.movies_id %}" class="btn btn-primary">Views</a>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8"> Data Not Found</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    {% endblock %}

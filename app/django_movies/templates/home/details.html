@@ -1,0 +1,23 @@
+{% extends "layouts.html" %}
+    {% block content %}
+        <h1>Detail Movies</h1>
+        <div>
+            <a href="{% url 'movies:Home' %}" class="btn btn-success">Back</a>
+        </div>
+
+        <br>
+
+        <div>
+            <h2>{{ movies.moviesName }}</h2>
+            <img src="../media/{{ movies.moviesFiles  }}" width="250px" height="250px" />
+            <h4>
+                <span class="badge badge-warning">{{ movies.moviesDuration }}</span>
+                <span class="badge badge-success">{{ movies.moviesUserRatings }}</span>
+                <span class="badge badge-info">{{ movies.moviesLanguage }}</span>
+            </h4>
+
+            <p>
+                {{ movies.moviesDescription }}
+            </p>
+        </div>
+    {% endblock %}

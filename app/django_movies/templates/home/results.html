@@ -1,0 +1,50 @@
+{% extends "layouts.html" %}
+    {% block content %}
+<h1>Movies Search</h1>
+<div>
+  <a href="{% url 'movies:Home' %}" class="btn btn-success">Back</a>
+</div>
+<br>
+<div>
+<form action="{% url 'movies:Search' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Movie Name</th>
+            <th>Image</th>
+            <th>Language</th>
+            <th>Duration</th>
+            <th>Desc Movie</th>
+            <th>User Rating</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if results %}
+            {% for movie in results %}
+            <tr>
+                <td>{{ movie.moviesName  }}</td>
+                <td><img src="media/{{ movie.moviesFiles  }}" width="150px" height="150px" /></td>
+                <td>{{ movie.moviesLanguage  }}</td>
+                <td>{{ movie.moviesDuration  }}</td>
+                <td>{{ movie.moviesDescription  }}</td>
+                <td>{{ movie.moviesUserRatings  }}</td>
+                <td>
+                    <a href="{% url 'movies:Details' movie.movies_id %}" class="btn btn-primary">Views</a>
+                    <a href="" class="btn btn-success">Mpa Ratting</a>
+                    <a href="" class="btn btn-info">Genres</a></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8"> Data Not Found</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
